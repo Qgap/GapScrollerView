@@ -15,6 +15,8 @@
 		045FA9331BD7A478007BF1CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045FA9311BD7A478007BF1CD /* LaunchScreen.storyboard */; };
 		045FA93E1BD7A478007BF1CD /* GapScrollerViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 045FA93D1BD7A478007BF1CD /* GapScrollerViewTests.m */; };
 		045FA9491BD7A479007BF1CD /* GapScrollerViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 045FA9481BD7A479007BF1CD /* GapScrollerViewUITests.m */; };
+		3AD6F92B1BD86043006EC6FA /* AdvertisingColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD6F9281BD86043006EC6FA /* AdvertisingColumn.m */; settings = {ASSET_TAGS = (); }; };
+		3AD6F92C1BD86043006EC6FA /* GapPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD6F92A1BD86043006EC6FA /* GapPageControl.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,10 @@
 		045FA9441BD7A479007BF1CD /* GapScrollerViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GapScrollerViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		045FA9481BD7A479007BF1CD /* GapScrollerViewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GapScrollerViewUITests.m; sourceTree = "<group>"; };
 		045FA94A1BD7A479007BF1CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AD6F9271BD86043006EC6FA /* AdvertisingColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisingColumn.h; sourceTree = "<group>"; };
+		3AD6F9281BD86043006EC6FA /* AdvertisingColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisingColumn.m; sourceTree = "<group>"; };
+		3AD6F9291BD86043006EC6FA /* GapPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GapPageControl.h; sourceTree = "<group>"; };
+		3AD6F92A1BD86043006EC6FA /* GapPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GapPageControl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,7 @@
 		045FA9221BD7A478007BF1CD /* GapScrollerView */ = {
 			isa = PBXGroup;
 			children = (
+				3AD6F9261BD86043006EC6FA /* View */,
 				045FA9261BD7A478007BF1CD /* AppDelegate.h */,
 				045FA9271BD7A478007BF1CD /* AppDelegate.m */,
 				045FA9291BD7A478007BF1CD /* ViewController.h */,
@@ -138,6 +145,17 @@
 				045FA94A1BD7A479007BF1CD /* Info.plist */,
 			);
 			path = GapScrollerViewUITests;
+			sourceTree = "<group>";
+		};
+		3AD6F9261BD86043006EC6FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3AD6F9271BD86043006EC6FA /* AdvertisingColumn.h */,
+				3AD6F9281BD86043006EC6FA /* AdvertisingColumn.m */,
+				3AD6F9291BD86043006EC6FA /* GapPageControl.h */,
+				3AD6F92A1BD86043006EC6FA /* GapPageControl.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,7 +289,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				045FA92B1BD7A478007BF1CD /* ViewController.m in Sources */,
+				3AD6F92C1BD86043006EC6FA /* GapPageControl.m in Sources */,
 				045FA9281BD7A478007BF1CD /* AppDelegate.m in Sources */,
+				3AD6F92B1BD86043006EC6FA /* AdvertisingColumn.m in Sources */,
 				045FA9251BD7A478007BF1CD /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,6 +518,7 @@
 				045FA94F1BD7A479007BF1CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		045FA9501BD7A479007BF1CD /* Build configuration list for PBXNativeTarget "GapScrollerViewTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +527,7 @@
 				045FA9521BD7A479007BF1CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		045FA9531BD7A479007BF1CD /* Build configuration list for PBXNativeTarget "GapScrollerViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +536,7 @@
 				045FA9551BD7A479007BF1CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
