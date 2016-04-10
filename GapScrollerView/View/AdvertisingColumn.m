@@ -15,11 +15,12 @@
 @interface AdvertisingColumn ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView          *adScroller;
-@property (nonatomic, strong) NSTimer               *timer;
+//@property (nonatomic, strong) NSTimer               *timer;
 @property (nonatomic, strong) GapPageControl        *pageControl ;
 @property (nonatomic, strong) NSMutableArray        *imageArr;
 @property (nonatomic, assign) float                 scrollerHeight;
-
+@property (nonatomic) dispatch_source_t timer;
+@property (nonatomic)  dispatch_queue_t queue;
 @end
 
 @implementation AdvertisingColumn
@@ -30,9 +31,10 @@
     
         self.adScroller = [self createScrollViewWithFrame:frame contentSize:CGSizeZero showVer:NO showHor:NO delegate:self IStranslatesAutoresizingMask:NO];
         self.scrollerHeight = frame.size.height;
+  
         [self addSubview:self.adScroller];
         self.imageArr = [NSMutableArray array];
-    
+        
     }
     return self;
 }
@@ -65,12 +67,10 @@
 //            [image sd_setImageWithURL:[NSURL URLWithString:imgArray[i]]];
             image.image = [UIImage imageNamed:imgArray[i]];
             [self.adScroller addSubview:image];
-
         }
         
         if (count >1) {
             self.pageControl = [[GapPageControl alloc] initWithFrame:CGRectMake(0, self.scrollerHeight - 30, SCREEN_WIDTH, 20) currentImageName:@"currentPage_icon" indicatorImageName:@"pageIndicator_icon"];
-
         
             self.pageControl.numberOfPages = count;
             self.pageControl.currentPage = 0;
@@ -91,15 +91,32 @@
             [self.adScroller addSubview:fristImageView];
             
             [self.adScroller scrollRectToVisible:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT) animated:NO];
-            self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(nextPage) userInfo:nil repeats:YES];
+//            self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(nextPage) userInfo:nil repeats:YES];
+           self.queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+
+            [self startTime];
         }
     }
     self.adScroller.scrollsToTop = NO;
 }
 
+- (void)startTime {
+            self.timer =  dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,self.queue);
+    dispatch_source_set_timer(self.timer,dispatch_walltime(NULL, 0),5.0*NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(self.timer, ^{
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            
+            [self nextPage];
+        });
+        
+    });
+    dispatch_resume(self.timer);
+}
 #pragma mark - NSTimer Action
 - (void)nextPage{
     CGFloat pageWidth = SCREEN_WIDTH;
+
+
     int currentPage = self.adScroller.contentOffset.x/pageWidth;
     if (currentPage == 0) {
         self.pageControl.currentPage = self.imageArr.count-1;
@@ -138,8 +155,9 @@
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     //开始拖动scrollview的时候 停止计时器控制的跳转
-    [self.timer invalidate];
-    self.timer = nil;
+//    [self.timer invalidate];
+//    self.timer = nil;
+    dispatch_source_cancel(self.timer);
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -160,7 +178,10 @@
         self.pageControl.currentPage = currentPage-1;
     }
     //拖动完毕的时候 重新开始计时器控制跳转
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(nextPage) userInfo:nil repeats:YES];
+//    self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(nextPage) userInfo:nil repeats:YES];
+//    dispatch_suspend(self.timer);
+    [self startTime];
+    
 }
 
 - (UIScrollView *)createScrollViewWithFrame:(CGRect)frame

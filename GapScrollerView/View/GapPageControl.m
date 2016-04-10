@@ -9,10 +9,8 @@
 #import "GapPageControl.h"
 
 @interface GapPageControl ()
-
 @property (nonatomic, strong)UIImage *currentImage;
 @property (nonatomic, strong)UIImage *inactiveImage;
-
 @end
 
 @implementation GapPageControl
@@ -20,7 +18,6 @@
 - (id)initWithFrame:(CGRect)frame
    currentImageName:(NSString *)currentImageName
  indicatorImageName:(NSString *)indicatorImageName {
-    
     self = [super initWithFrame:frame];
     if (self) {
         self.currentImage = [UIImage imageNamed:currentImageName];
@@ -38,8 +35,7 @@
     }
 }
 
-- (UIImageView *) imageViewForSubview: (UIView *) view
-{
+- (UIImageView *)imageViewForSubview:(UIView *) view {
     UIImageView * dot = nil;
     if ([view isKindOfClass: [UIView class]]) {
         for (UIView* subview in view.subviews) {
